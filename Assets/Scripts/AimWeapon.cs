@@ -5,7 +5,11 @@ using UnityEngine;
 public class AimWeapon : MonoBehaviour {
 
     public Transform aimTransform;
+    public Transform spawnPoint;
     public Camera mainCamera;
+
+    public GameObject bulletPrefab;
+    public float bulletForce;
 
     private void Update() {
         Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -21,5 +25,11 @@ public class AimWeapon : MonoBehaviour {
             localScale.y = +1f;
         }
         aimTransform.localScale = localScale;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, Quaternion.identity);
+            bullet.GetComponent<Rigidbody2D>().AddForce(aimDirection.normalized * bulletForce, ForceMode2D.Impulse);
+        }
     }
 }
