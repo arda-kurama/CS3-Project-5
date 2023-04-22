@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChangeCamera : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class ChangeCamera : MonoBehaviour
 
     public float roundTime;
     private float nextRoundTime = 10;
+
+    public Image roundTimer;
     
     void Start()
     {
@@ -19,8 +22,10 @@ public class ChangeCamera : MonoBehaviour
 
     void Update()
     {
+        roundTimer.fillAmount = (nextRoundTime - Time.time) / roundTime;
         if (Time.time > nextRoundTime)
         {
+            roundTimer.fillAmount = 0f;
             nextRoundTime = Time.time + roundTime;
             if (_vCams[0].activeSelf)
             {
