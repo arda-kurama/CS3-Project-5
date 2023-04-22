@@ -11,6 +11,8 @@ public class HealthManager : MonoBehaviour
     public float healthAmount = 100f;
     public float healthAmount1 = 100f;
 
+    public GameObject bullet;
+    public GameObject stickman;
 
     void Start()
     {
@@ -22,16 +24,6 @@ public class HealthManager : MonoBehaviour
         if (healthAmount <= 0 || healthAmount1 <= 0)
         {
             Application.LoadLevel(Application.loadedLevel);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            TakeDamage(20);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage1(20);
         }
 
     }
@@ -62,5 +54,21 @@ public class HealthManager : MonoBehaviour
         healthAmount1 = Mathf.Clamp(healthAmount1, 0, 100);
 
         healthBar1.fillAmount = healthAmount1 / 100f;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            if (stickman.gameObject.name == "Stickman")
+            {
+                TakeDamage(25);
+            }
+
+            if (stickman.gameObject.name == "Stickman (1)")
+            {
+                TakeDamage1(25);
+            }
+        }
     }
 }
