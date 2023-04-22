@@ -8,11 +8,13 @@ public class Balance : MonoBehaviour
     Rigidbody2D rb;
     public float force;
 
-    void Start() {
+    void Start()
+    {
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
-    void Update() {
+    void Update()
+    {
         rb.MoveRotation(Mathf.LerpAngle(rb.rotation, targetRotation, force * Time.deltaTime));
     }
 }

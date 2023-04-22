@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AimWeapon : MonoBehaviour {
+public class AimWeapon : MonoBehaviour
+{
 
     public Transform aimTransform;
     public Transform spawnPoint;
@@ -11,7 +12,8 @@ public class AimWeapon : MonoBehaviour {
     public GameObject bulletPrefab;
     public float bulletForce;
 
-    private void Update() {
+    private void Update()
+    {
         Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
         Vector3 aimDirection = (mousePosition - aimTransform.position).normalized;
@@ -19,11 +21,16 @@ public class AimWeapon : MonoBehaviour {
         aimTransform.eulerAngles = new Vector3(0, 0, angle);
 
         Vector3 localScale = Vector3.one;
-        if (angle > 90 || angle < -90) {
+
+        if (angle > 90 || angle < -90)
+        {
             localScale.y = -1f;
-        } else {
+        }
+        else
+        {
             localScale.y = +1f;
         }
+
         aimTransform.localScale = localScale;
 
         if (Input.GetMouseButtonDown(0))

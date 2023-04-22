@@ -23,38 +23,49 @@ public class Movement : MonoBehaviour
     public LayerMask ground;
     public Transform playerPos;
 
-    void Start() {
+    void Start()
+    {
         leftLegRB = leftLeg.GetComponent<Rigidbody2D>();
         rightLegRB = rightLeg.GetComponent<Rigidbody2D>();
     }
 
-    void Update() {
-        if (Input.GetAxisRaw("Horizontal") != 0) {
-            if (Input.GetAxisRaw("Horizontal") > 0) {
+    void Update()
+    {
+        if (Input.GetAxisRaw("Horizontal") != 0)
+        {
+            if (Input.GetAxisRaw("Horizontal") > 0)
+            {
                 anim.Play("WalkRight");
                 StartCoroutine(MoveRight(stepWait));
-            } else {
+            }
+            else
+            {
                 anim.Play("WalkLeft");
                 StartCoroutine(MoveLeft(stepWait));
             }
-        } else {
+        }
+        else
+        {
             anim.Play("Idle");
         }
 
         isOnGround = Physics2D.OverlapCircle(playerPos.position, positionRadius, ground);
 
-        if(isOnGround == true && Input.GetKeyDown(KeyCode.Space)) {
+        if(isOnGround == true && Input.GetKeyDown(KeyCode.Space))
+        {
             rb.AddForce(Vector2.up * jumpForce);
         }
     }
 
-    IEnumerator MoveRight(float seconds) {
+    IEnumerator MoveRight(float seconds)
+    {
         leftLegRB.AddForce(Vector2.right * (speed * 1000) * Time.deltaTime);
         yield return new WaitForSeconds(seconds);
         rightLegRB.AddForce(Vector2.right * (speed * 1000) * Time.deltaTime);
     }
 
-    IEnumerator MoveLeft(float seconds) {
+    IEnumerator MoveLeft(float seconds)
+    {
         rightLegRB.AddForce(Vector2.left * (speed * 1000) * Time.deltaTime);
         yield return new WaitForSeconds(seconds);
         leftLegRB.AddForce(Vector2.left * (speed * 1000) * Time.deltaTime);
