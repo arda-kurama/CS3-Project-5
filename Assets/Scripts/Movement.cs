@@ -53,7 +53,7 @@ public class Movement : MonoBehaviour
 
         if(isOnGround == true && Input.GetKeyDown(KeyCode.Space))
         {
-            rb.AddForce(Vector2.up * jumpForce);
+            rb.AddForce(Vector2.up * (jumpForce * 1000) * Time.deltaTime);
         }
     }
 
