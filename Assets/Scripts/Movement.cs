@@ -23,6 +23,11 @@ public class Movement : MonoBehaviour
     public LayerMask ground;
     public Transform playerPos;
 
+    private float jumpTime = 2f;
+    private float nextJump = 2f;
+    private bool jump = false;
+    private float currentTime;
+
     void Start()
     {
         leftLegRB = leftLeg.GetComponent<Rigidbody2D>();
@@ -51,9 +56,20 @@ public class Movement : MonoBehaviour
 
         isOnGround = Physics2D.OverlapCircle(playerPos.position, positionRadius, ground);
 
-        if(isOnGround == true && Input.GetKeyDown(KeyCode.Space))
+        if (isOnGround == true && Input.GetKeyDown(KeyCode.Space) && jump == false)
         {
             rb.AddForce(Vector2.up * (jumpForce * 1000) * Time.deltaTime);
+            currentTime = Time.time;
+            jump = true;
+        }
+
+        if (jump)
+        {
+            if ((Time.time - currentTime) > 2f)
+            {
+                nextJump += 2f;
+                jump = false;
+            }
         }
     }
 

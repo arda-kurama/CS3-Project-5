@@ -11917,6 +11917,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PF Village Props - Hay Bale (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6430119279636018801, guid: 6a9ccf5128b7b1349a5a89b136f037a4, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6430119279636018803, guid: 6a9ccf5128b7b1349a5a89b136f037a4, type: 3}
       propertyPath: m_RootOrder
       value: 45
