@@ -13,7 +13,9 @@ public class ChangeCamera : MonoBehaviour
     private float nextRoundTime = 10;
 
     public Image roundTimer;
-    
+    public Image reloadTimer;
+    public Image reloadTimer1;
+
     void Start()
     {
         stickman1.GetComponent<Movement>().enabled = false;
@@ -25,6 +27,8 @@ public class ChangeCamera : MonoBehaviour
         roundTimer.fillAmount = (nextRoundTime - Time.time) / roundTime;
         if (Time.time > nextRoundTime)
         {
+            reloadTimer.fillAmount = 0f;
+            reloadTimer1.fillAmount = 0f;
             roundTimer.fillAmount = 0f;
             nextRoundTime = Time.time + roundTime;
             if (_vCams[0].activeSelf)

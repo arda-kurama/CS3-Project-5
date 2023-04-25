@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AimWeapon : MonoBehaviour
 {
@@ -11,6 +12,18 @@ public class AimWeapon : MonoBehaviour
 
     public GameObject bulletPrefab;
     public float bulletForce;
+
+    private float reloadTime = 4f;
+    private float nextReload = 4f;
+    private bool reload = false;
+    private float currentTime;
+
+    public Image reloadTimer;
+
+    private void Start()
+    {
+        reloadTimer.fillAmount = 0f;
+    }
 
     private void Update()
     {
@@ -33,10 +46,25 @@ public class AimWeapon : MonoBehaviour
 
         aimTransform.localScale = localScale;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && reload == false)
         {
             GameObject bullet = Instantiate(bulletPrefab, spawnPoint.position, Quaternion.identity);
             bullet.GetComponent<Rigidbody2D>().AddForce(aimDirection.normalized * bulletForce, ForceMode2D.Impulse);
+            currentTime = Time.time;
+            reload = true;
         }
+
+        if (reload)
+        {
+            reloadTimer.fillAmount = (reloadTime - (Time.time - currentTime)) / reloadTime;
+
+            if ((Time.time - currentTime) > 4f)
+            {
+                nextReload += 4f;
+                reloadTimer.fillAmount = 0f;
+                reload = false;
+            }
+        }
+
     }
 }
