@@ -58,7 +58,7 @@ public class Movement : MonoBehaviour
 
         if (isOnGround == true && Input.GetKeyDown(KeyCode.Space) && jump == false)
         {
-            rb.AddForce(Vector2.up * (jumpForce * 1000) * Time.deltaTime);
+            rb.AddForce(Vector2.up * (jumpForce * 4));
             currentTime = Time.time;
             jump = true;
         }
